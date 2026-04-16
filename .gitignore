@@ -1,0 +1,18 @@
+# Ignore compiled Java classes
+*.class
+
+# Ignore massive datasets and archives
+NASA_*
+kddcup*
+caida*
+*.gz
+*.zip
+
+# Ignore generated CSV data (we only want the source code and plots)
+*.csv
+
+# Python cache
+__pycache__/
+
+#Datasets
+datasets/*
