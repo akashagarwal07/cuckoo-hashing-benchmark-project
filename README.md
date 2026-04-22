@@ -61,6 +61,7 @@ The Python visualization script takes two arguments: `<csv_file>` and `<prefix>`
     mkdir -p plots
     python plot_graphs.py nasa_results.csv nasa
     python plot_graphs.py kdd_results.csv kdd
+    python plot_graphs.py internet_results.csv internet
 
 This will output prefixed visualizations (e.g., `nasa_insertion_time.png`, `kdd_failures.png`) directly into the `plots/` directory.
 
