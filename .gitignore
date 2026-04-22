@@ -2,9 +2,6 @@
 *.class
 
 # Ignore massive datasets and archives
-NASA_*
-kddcup*
-caida*
 *.gz
 *.zip
 
