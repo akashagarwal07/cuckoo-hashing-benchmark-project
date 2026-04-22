@@ -2,12 +2,12 @@
 
 An empirical analysis and implementation of advanced Cuckoo Hashing architectures designed to mitigate cycle-formation failures under high load factors. This project benchmarks standard Cuckoo Hashing against modern variants (Stash, $d$-ary, Bucketized) and classic baselines using real-world network data.
 
-## 📌 Project Overview
+## Project Overview
 Traditional open-addressing and closed-addressing hashing methods provide expected `O(1)` performance but suffer from poor worst-case behavior under high load. Cuckoo Hashing guarantees worst-case `O(1)` lookups but is fragile, mathematically failing near a 50% load factor due to cycle formation. 
 
 This project explores architectural shifts to bypass this 50% threshold, specifically implementing a constant-sized "Stash" and bucketized arrays to absorb collisions, successfully pushing stability past 90% load factors while retaining strict `O(1)` lookup bounds.
 
-## 🛠 Algorithms Implemented
+## Algorithms Implemented
 All data structures expose identical `insert(k)`, `lookup(k)`, and `delete(k)` APIs for fair lifecycle benchmarking:
 1. **Standard Cuckoo Hashing** (2 tables, strict alternating evictions)
 2. **Cuckoo Hashing with a Stash** (Auxiliary 4-item array to intercept cycles)
@@ -16,7 +16,7 @@ All data structures expose identical `insert(k)`, `lookup(k)`, and `delete(k)` A
 5. **Linear Probing** (Open-addressing baseline)
 6. **Separate Chaining** (Closed-addressing baseline using Linked Lists)
 
-## 📊 Datasets
+## Datasets
 The benchmark utilizes three diverse real-world datasets to test structural resilience across different traffic distributions:
 1. **NASA HTTP Web Server Logs (Jul 95):** HTTP requests deduplicated by Host/IP.
 2. **KDD Cup 1999 (10% Subset):** Network intrusion data deduplicated by exact connection signature.
@@ -24,7 +24,7 @@ The benchmark utilizes three diverse real-world datasets to test structural resi
 
 A custom dynamic data ingestion pipeline parses the logs, extracts the primary identifier based on the dataset type (`NASA`, `KDD`, or `INTERNET`), converts it to a 32-bit integer, and deduplicates the traffic to ensure accurate load-factor scaling.
 
-## 🚀 How to Run the Benchmark
+## How to Run the Benchmark
 
 ### Prerequisites
 * **Java:** JDK 8 or higher
