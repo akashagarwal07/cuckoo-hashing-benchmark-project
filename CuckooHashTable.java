@@ -99,7 +99,7 @@ public class CuckooHashTable {
 
         // If we break out of the loop, we hit a cycle.
         // In Phase 2, this is where we will add to the STASH instead of failing!
-        System.err.println("Max loop reached! Cycle detected. Rehash needed for key: " + currentKey);
+        //System.err.println("Max loop reached! Cycle detected. Rehash needed for key: " + currentKey);
         return false; 
     }
 

@@ -8,9 +8,6 @@ caida*
 *.gz
 *.zip
 
-# Ignore generated CSV data (we only want the source code and plots)
-*.csv
-
 # Python cache
 __pycache__/
 

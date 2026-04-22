@@ -1,18 +1,23 @@
 public class FinalProjectRunner {
 
     public static void main(String[] args) {
-        if (args.length < 1) {
-            System.err.println("Usage: java FinalProjectRunner <path_to_dataset>");
+        // Require two arguments now: the file path and the dataset type
+        if (args.length < 2) {
+            System.err.println("Usage: java FinalProjectRunner <path_to_dataset> <dataset_type>");
+            System.err.println("Dataset types allowed: NASA, KDD, INTERNET");
+            System.err.println("Example: java FinalProjectRunner kddcup.data_10_percent KDD > kdd_results.csv");
             return;
         }
 
         String filePath = args[0];
-        int[] dataset = DataParser.parseLogFile(filePath);
+        String datasetType = args[1];
+        
+        // Pass the new argument into the parser
+        int[] dataset = DataParser.parseLogFile(filePath, datasetType);
 
         if (dataset == null || dataset.length == 0) return;
 
-        // We will test the structures as they fill up from 10% to 95% capacity
-        double[] loadFactors = {0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.85, 0.90, 0.95};
+        double[] loadFactors = {0.50, 0.60, 0.70, 0.80, 0.85, 0.90, 0.95};
         
         System.out.println("\n--- GRAPH DATA OUTPUT ---");
         System.out.println("LoadFactor,Algorithm,InsertTime_ms,LookupTime_ms,DeleteTime_ms,Failures");

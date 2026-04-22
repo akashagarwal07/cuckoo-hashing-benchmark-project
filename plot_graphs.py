@@ -2,16 +2,20 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import io
+import sys
 
-print("Processing benchmark_results.csv...")
+fileName = sys.argv[1] if len(sys.argv) > 1 else input("Enter the path to the data file: ")
+prefix = sys.argv[2] if len(sys.argv) > 2 else input("Enter the prefix for output files (e.g., 'experiment1_'): ")
+
+print("Processing " + fileName + "...")
 
 # 1. Read the file, handling the Windows PowerShell UTF-16 encoding
 try:
-    with open('benchmark_results.csv', 'r', encoding='utf-16') as file:
+    with open(fileName, 'r', encoding='utf-16') as file:
         lines = file.readlines()
 except UnicodeError:
     # Fallback just in case it was saved in standard UTF-8
-    with open('benchmark_results.csv', 'r', encoding='utf-8') as file:
+    with open(fileName, 'r', encoding='utf-8') as file:
         lines = file.readlines()
 
 # 2. Automatically skip the Java setup text at the top of the file
@@ -34,37 +38,37 @@ df = pd.read_csv(io.StringIO(''.join(csv_lines)))
 # 4. Plot Load Factor vs Insertion Time
 plt.figure(figsize=(20, 12))
 sns.lineplot(data=df, x='LoadFactor', y='InsertTime_ms', hue='Algorithm', marker='o')
-plt.title('Insertion Time vs. Load Factor (NASA Web Logs)')
+plt.title('Insertion Time vs. Load Factor')
 plt.xlabel('Load Factor')
 plt.ylabel('Total Insertion Time (ms)')
 plt.grid(True)
-plt.savefig('plots/insertion_time.png')
+plt.savefig('plots/' + prefix + '_insertion_time.png')
 
 # 5. Plot Load Factor vs Failures
 plt.figure(figsize=(20, 12))
 sns.lineplot(data=df, x='LoadFactor', y='Failures', hue='Algorithm', marker='s')
-plt.title('Insertion Failures vs. Load Factor (NASA Web Logs)')
+plt.title('Insertion Failures vs. Load Factor ')
 plt.xlabel('Load Factor')
 plt.ylabel('Number of Failures')
 plt.grid(True)
-plt.savefig('plots/failures.png')
+plt.savefig('plots/' + prefix + '_failures.png')
 
 # 6. Plot Load Factor vs Delete Time
 plt.figure(figsize=(20, 12))
 sns.lineplot(data=df, x='LoadFactor', y='DeleteTime_ms', hue='Algorithm', marker='s')
-plt.title('Delete Time vs. Load Factor (NASA Web Logs)')
+plt.title('Delete Time vs. Load Factor ')
 plt.xlabel('Load Factor')
 plt.ylabel('Total Delete Time (ms)')
 plt.grid(True)
-plt.savefig('plots/delete_time.png')
+plt.savefig('plots/' + prefix + '_delete_time.png')
 
 # 7. Plot Load Factor vs Lookup Time
 plt.figure(figsize=(20, 12))
 sns.lineplot(data=df, x='LoadFactor', y='LookupTime_ms', hue='Algorithm', marker='s')
-plt.title('Lookup Time vs. Load Factor (NASA Web Logs)')
+plt.title('Lookup Time vs. Load Factor ')
 plt.xlabel('Load Factor')
 plt.ylabel('Total Lookup Time (ms)')
 plt.grid(True)
-plt.savefig('plots/lookup_time.png')
+plt.savefig('plots/' + prefix + '_lookup_time.png')
 
 print("Success! Graphs generated.")

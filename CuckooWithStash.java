@@ -129,14 +129,14 @@ public class CuckooWithStash {
                 if (stash[i] == EMPTY) {
                     stash[i] = currentKey;
                     stashCount++;
-                    System.err.println("Cycle averted. Key " + currentKey + " secured in Stash.");
+                    // System.err.println("Cycle averted. Key " + currentKey + " secured in Stash.");
                     return true;
                 }
             }
         }
 
         // Only fail if the Stash is completely full.
-        System.err.println("Fatal: Stash is full! Rehash required for key: " + currentKey);
+        // System.err.println("Fatal: Stash is full! Rehash required for key: " + currentKey);
         return false; 
     }
 }
